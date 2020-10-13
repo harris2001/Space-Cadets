@@ -1,6 +1,0 @@
-clear a;
-incr a;
-clear b;
-while a not 0 do;
-    incr b;
-    end;
