@@ -22,14 +22,18 @@ public class CircleDetection {
             System.out.println("Error opening image!");
             System.exit(-1);
         }
+        while(matrix.height()>420) {
+        	Size sz = new Size(matrix.height()/2,matrix.width()/2);
+        	Imgproc.resize( matrix, matrix, sz );
+        }
         Mat gray = new Mat();
         Imgproc.cvtColor(matrix, gray, Imgproc.COLOR_BGR2GRAY);
         Imgproc.medianBlur(gray, gray, 5);
-        HighGui.imshow("gray-scaled-image", gray);
+        //HighGui.imshow("gray-scaled-image", gray);
 
         Mat circles = new Mat();
         
-        Imgproc.HoughCircles(gray, circles, Imgproc.HOUGH_GRADIENT, 1.0,(double)gray.rows()/100, 100.0, 30.0, 1, 35);
+        Imgproc.HoughCircles(gray, circles, Imgproc.HOUGH_GRADIENT, 1.0,(double)gray.rows()/16, 100.0, 40.0, 1, 100);
         
         for (int x = 0; x < circles.cols(); x++) {
             double[] c = circles.get(0, x);
